@@ -61,11 +61,15 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy to Azure Container Instances
+    - name: Update Azure Container Instance with new image
+      run: |
+        az container restart --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME
+
+    - name: Update Azure Container Instance environment variables
       run: |
         az container update \
           --resource-group $RESOURCE_GROUP \
           --name $AZURE_CONTAINER_NAME \
-          --image $IMAGE_NAME \
-          --set environmentVariables.PINEKEY=${{ secrets.PINEKEY }} environmentVariables.OPENKEY=${{ secrets.OPENKEY }}
+          --set image=$IMAGE_NAME \
+          --environment-variables PINEKEY=${{ secrets.PINEKEY }} OPENKEY=${{ secrets.OPENKEY }}
 
