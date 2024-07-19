@@ -81,6 +81,7 @@ jobs:
           --cpu 1 \
           --memory 1 \
           --ports 8000 \
+          --ip-address public \
           --environment-variables PINEKEY=${{ secrets.PINEKEY }} OPENKEY=${{ secrets.OPENKEY }} \
           --restart-policy Always
 
