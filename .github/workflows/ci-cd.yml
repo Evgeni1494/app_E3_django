@@ -63,11 +63,14 @@ jobs:
 
     - name: Remove existing Azure Container Instance if exists
       run: |
-        az container delete --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME --yes --no-wait || true
+        az container delete --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME --yes || true
 
     - name: Wait for Azure Container Instance to be deleted
       run: |
-        while az container show --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME --output none; do echo "Waiting for container to be deleted..."; sleep 10; done
+        while az container show --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME --output none; do
+          echo "Waiting for container to be deleted..."
+          sleep 10
+        done
 
     - name: Create new Azure Container Instance
       run: |
