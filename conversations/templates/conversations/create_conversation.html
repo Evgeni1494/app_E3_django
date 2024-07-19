@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Conversation</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Create a new Conversation</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Conversation Name:</label>
+            <input type="text" name="name" id="name" class="text-area">
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
+</body>
+</html>

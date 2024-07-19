@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversation {{ conversation.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Conversation: {{ conversation.name }}</h2>
+        <div>
+            {% for message in messages %}
+                <div class="message-{{ message.role }}">
+                    <strong>{{ message.role|title }}:</strong> {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Send</button>
+        </form>
+    </div>
+</body>
+</html>

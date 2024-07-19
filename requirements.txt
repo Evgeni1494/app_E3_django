@@ -1,0 +1,7 @@
+Django>=5.0,<6.0
+openai
+pinecone-client
+python-dotenv
+sentry-sdk
+django-prometheus
+numpy
