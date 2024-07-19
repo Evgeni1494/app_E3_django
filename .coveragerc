@@ -1,0 +1,39 @@
+[run]
+omit =
+    SoWeChat_django/__init__.py
+    SoWeChat_django/asgi.py
+    SoWeChat_django/wsgi.py
+    manage.py
+    conversations/__init__.py
+    conversations/admin.py
+    conversations/apps.py
+    conversations/forms.py
+    conversations/models.py
+    conversations/tests.py
+    conversations/urls.py
+    conversations/utils.py
+[run]
+omit =
+    SoWeChat_django/__init__.py
+    SoWeChat_django/asgi.py
+    SoWeChat_django/wsgi.py
+    manage.py
+    conversations/__init__.py
+    conversations/admin.py
+    conversations/apps.py
+    conversations/forms.py
+    conversations/models.py
+    conversations/tests.py
+    conversations/urls.py
+    conversations/utils.py
+
+[report]
+exclude_lines =
+    # Exclure les fichiers avec 0% de couverture
+    pragma: no cover
+    if __name__ == .__main__:
+    # Ne jamais couvrir les appels print ou pdb
+    print(.*
+    ^\s*print\(.*
+    ^\s*assert\s
+    ^\s*raise NotImplementedError

@@ -5,3 +5,5 @@ python-dotenv
 sentry-sdk
 django-prometheus
 numpy
+pytest-django
+pytest-cov

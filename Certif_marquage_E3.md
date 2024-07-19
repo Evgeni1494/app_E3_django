@@ -40,5 +40,3 @@ E3
 - La documentation est communiquée dans un format qui respecte les recommandations d’accessibilité (par exemple celles de l’association Valentin Haüy ou de Microsoft).
 
 
-
-
