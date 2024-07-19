@@ -61,15 +61,19 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Update Azure Container Instance with new image
+    - name: Remove existing Azure Container Instance if exists
       run: |
-        az container restart --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME
+        az container delete --resource-group $RESOURCE_GROUP --name $AZURE_CONTAINER_NAME --yes --no-wait || true
 
-    - name: Update Azure Container Instance environment variables
+    - name: Create new Azure Container Instance
       run: |
-        az container update \
+        az container create \
           --resource-group $RESOURCE_GROUP \
           --name $AZURE_CONTAINER_NAME \
-          --set image=$IMAGE_NAME \
-          --environment-variables PINEKEY=${{ secrets.PINEKEY }} OPENKEY=${{ secrets.OPENKEY }}
+          --image $IMAGE_NAME \
+          --cpu 1 \
+          --memory 1 \
+          --ports 8000 \
+          --environment-variables PINEKEY=${{ secrets.PINEKEY }} OPENKEY=${{ secrets.OPENKEY }} \
+          --restart-policy Always
 
