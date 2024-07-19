@@ -38,3 +38,7 @@ E3
 - La documentation technique de la chaîne de monitorage couvre la procédure d’installation de la chaîne, de configurations, et d’utilisation du monitorage à destination des équipes techniques.
 
 - La documentation est communiquée dans un format qui respecte les recommandations d’accessibilité (par exemple celles de l’association Valentin Haüy ou de Microsoft).
+
+
+
+
