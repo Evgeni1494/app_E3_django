@@ -192,7 +192,7 @@ PROMETHEUS_EXPORT_MIGRATIONS = False
 # SENTRY
 
 sentry_sdk.init(
-    dsn="https://fb7b5e70ec2e926b4ba8a25e92a31934@o4507446759718912.ingest.de.sentry.io/4507446762274896",  # Remplacez par votre DSN
+    dsn="https://fb7b5e70ec2e926b4ba8a25e92a31934@o4507446759718912.ingest.de.sentry.io/4507446762274896",  # DSN ICI
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
     send_default_pii=True
