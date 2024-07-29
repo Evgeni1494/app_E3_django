@@ -16,12 +16,32 @@ index = pc.Index(name=index_name)
 client = OpenAI(api_key=os.getenv("OPENKEY"))
 
 def get_embedding(text, model="text-embedding-3-large"):
+    """
+    Obtain an embedding vector for the given text using the specified model.
+
+    Args:
+        text (str): The text to be embedded.
+        model (str): The model to use for embedding (default is "text-embedding-3-large").
+
+    Returns:
+        list: The embedding vector.
+    """
     text = text.replace("\n", " ")
     response = client.embeddings.create(input=[text], model=model)
     embedding = response.data[0].embedding
     return embedding
 
 def search_in_pinecone(question_embedding, conversation_id):
+    """
+    Search for results in Pinecone using the question embedding and conversation ID.
+
+    Args:
+        question_embedding (list): The embedding of the question.
+        conversation_id (str): The ID of the conversation.
+
+    Returns:
+        dict: The query results.
+    """
     query_results = index.query(
         vector=question_embedding,
         top_k=5,
@@ -31,6 +51,15 @@ def search_in_pinecone(question_embedding, conversation_id):
     return query_results
 
 def search_in_all_namespaces(question_embedding):
+    """
+    Search for results in all filtered Pinecone namespaces using the question embedding.
+
+    Args:
+        question_embedding (list): The embedding of the question.
+
+    Returns:
+        list: The final search results.
+    """
     stats = index.describe_index_stats()
     namespaces = stats.get("namespaces", {}).keys()
     filtered_namespaces = [ns for ns in namespaces if ns.startswith("SoWePoC")]
@@ -71,6 +100,14 @@ def search_in_all_namespaces(question_embedding):
     return final_results
 
 def save_question_in_pinecone(question, conversation_id, model="text-embedding-3-large"):
+    """
+    Save a question in Pinecone with its embedding and metadata.
+
+    Args:
+        question (str): The question to save.
+        conversation_id (str): The ID of the conversation.
+        model (str): The model to use for embedding (default is "text-embedding-3-large").
+    """
     question_namespace = f"Q+{conversation_id}"
     embedding = get_embedding(question, model)
     vector_id = str(uuid.uuid4())
@@ -78,6 +115,15 @@ def save_question_in_pinecone(question, conversation_id, model="text-embedding-3
     print(f"Question enregistrée avec metadata dans {question_namespace} avec ID {vector_id}")
 
 def save_interaction_in_pinecone(question, answer, conversation_id, model="text-embedding-3-large"):
+    """
+    Save an interaction (question and answer) in Pinecone with its embedding and metadata.
+
+    Args:
+        question (str): The question of the interaction.
+        answer (str): The answer of the interaction.
+        conversation_id (str): The ID of the conversation.
+        model (str): The model to use for embedding (default is "text-embedding-3-large").
+    """
     interaction_text = f"Question: {question} Answer: {answer}"
     embedding = get_embedding(interaction_text, model)
     vector_id = str(uuid.uuid4())
@@ -86,6 +132,16 @@ def save_interaction_in_pinecone(question, answer, conversation_id, model="text-
     save_question_in_pinecone(question, conversation_id, model)
 
 def generate_answer(question, conversation_id):
+    """
+    Generate an answer to a question using the context from Pinecone and OpenAI.
+
+    Args:
+        question (str): The question asked.
+        conversation_id (str): The ID of the conversation.
+
+    Returns:
+        str: The generated answer.
+    """
     question_namespace = f"Q+{conversation_id}"
     question_embedding = get_embedding(question)
 
