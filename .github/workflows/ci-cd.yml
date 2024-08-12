@@ -41,7 +41,7 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       AZURE_CONTAINER_REGISTRY: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
       AZURE_CONTAINER_NAME: app-web-certif-evgeni
-      RESOURCE_GROUP: END_Project_Evgeni
+      RESOURCE_GROUP: End_project_evgeni
       IMAGE_NAME: evgeni1494/django-test:latest
 
     steps:
