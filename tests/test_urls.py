@@ -31,7 +31,7 @@ class TestUrls(SimpleTestCase):
 
     def test_create_conversation_url(self):
         """
-        Test the create conversation URL.
+        Test the create conversation URL
         
         Ensures that the create conversation URL resolves to the correct view function.
         """
