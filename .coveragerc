@@ -12,3 +12,5 @@ omit =
     conversations/tests.py
     conversations/urls.py
     conversations/utils.py
+    SoWeChat_django/urls.py 
+    conversations/views.py
