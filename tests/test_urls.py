@@ -10,7 +10,7 @@ class TestUrls(SimpleTestCase):
     """
     Test suite for testing the URL configurations of the conversations app.
     """
-
+    databases = ['default']
     def test_login_url(self):
         """
         Test the login URL.
